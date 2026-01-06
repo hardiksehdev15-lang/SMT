@@ -1,0 +1,1255 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sehdev Machine Tools</title>
+
+  <!-- Google Fonts -->
+
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fugaz+One&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <style>
+  
+    :root{
+      --primary: #0a66c2;
+      --primary-dark: #084d99;
+      --light: #e6f0fa;
+      --white: #ffffff;
+      --dark: #0d1b2a;
+      --muted: #6c757d;
+      --card: #f8fbff;
+      --nav-height: 112px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Poppins","Segoe UI",Arial,sans-serif;
+      background: linear-gradient(180deg, var(--light) 0%, #ffffff 100%);
+      color:var(--dark);
+    }
+
+    /* ===== HEADER ===== */
+    /* ================= HEADER ================= */
+
+header.site-header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1400;
+
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  background: rgba(255,255,255,0.8);
+
+  border-bottom: 1px solid rgba(13,27,42,0.06);
+  transition: background .25s ease, box-shadow .25s ease;
+}
+
+/* Scroll state */
+header.site-header.scrolled{
+  background: var(--primary);
+  color: var(--white);
+  box-shadow: 0 6px 22px rgba(10,102,194,0.12);
+}
+
+/* ================= NAV ROW ================= */
+
+.nav-row{
+  height:var(--nav-height);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 6%;
+  gap:24px;
+}
+
+/* ================= BRAND ================= */
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:180px;
+  text-decoration:none;
+}
+
+.brand img{
+  height:60px;
+  border-radius:6px;
+}
+
+.title{
+  font-family:'Inter', sans-serif;
+
+  font-size:33px;         
+  font-weight:600;        
+  letter-spacing:0.2px;   
+  line-height:1.05;
+
+  text-transform:uppercase;
+
+  color:#000;
+
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+
+header.site-header.scrolled .brand .title{
+  color:#fff;
+}
+
+.brand .subtitle{
+  font-size:15px;
+  font-weight:550;
+  color:#000;
+}
+
+/* ================= PRIMARY NAV ================= */
+
+nav.primary-nav ul{
+  list-style:none;
+  display:flex;
+  align-items:center;   /* 🔒 vertical alignment lock */
+  gap:6px;
+  margin:0;
+  padding:0;
+}
+
+/* All nav links INCLUDING dropdown triggers */
+nav.primary-nav a,
+nav.primary-nav .mega-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:14px 20px;
+  border-radius:8px;
+
+  font-size:16px;
+  font-weight:500;
+  line-height:1;        /* 🔑 fixes vertical mismatch */
+
+  color:var(--dark);
+  text-decoration:none;
+
+  transition: background .25s ease, color .25s ease;
+}
+
+/* Scroll color */
+header.site-header.scrolled nav.primary-nav a,
+header.site-header.scrolled nav.primary-nav .mega-btn{
+  color:#fff;
+}
+
+header.site-header,
+.nav-row,
+nav.primary-nav{
+  overflow: visible;
+}
+
+/* Hover */
+nav.primary-nav a:hover,
+nav.primary-nav .mega-btn:hover{
+  background: rgba(10,102,194,.08);
+  color: var(--primary);
+}
+
+/* ================= DROPDOWN ARROW FIX ================= */
+
+nav.primary-nav a span,
+nav.primary-nav .mega-btn span{
+  display:inline-flex;
+  align-items:center;
+  margin-left:6px;
+  font-size:0.85em;
+  line-height:1;
+}
+
+/* ================= MEGA MENU ================= */
+@media (min-width: 901px) {
+  nav.primary-nav li.mega {
+    position: relative;
+  }
+
+  .mega-panel {
+    position: absolute;
+    /* top: 100% attaches the menu to the nav bar to prevent flickering */
+    top: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Fixed width prevents the 'Services' menu from overlapping the 'Products' area */
+    width: 900px; 
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    
+    display: grid;
+    /* Three equal columns */
+    grid-template-columns: 1fr 1fr 1fr; 
+    gap: 40px;
+    
+    z-index: 2500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease-in-out;
+  }
+
+  nav.primary-nav li.mega:hover > .mega-panel {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Column Heading Styling (MACHINES, COMPONENTS, etc.) */
+  .mega-col h4 {
+    margin: 0 0 15px 0 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #6c757d !important; /* Muted gray like the image */
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid #eee !important; /* Horizontal line under header */
+    width: 100%;
+  }
+
+  /* Dropdown Item Styling */
+  .mega-col a {
+    display: block !important;
+    padding: 8px 0 !important;
+    margin: 0 !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #333 !important;
+    text-decoration: none !important;
+    line-height: 1.4 !important;
+    transition: color 0.2s !important;
+    text-align: left !important;
+  }
+
+  .mega-col a:hover {
+    color: var(--primary) !important;
+    background: transparent !important;
+  }
+
+  /* Reset the first-child grid you had earlier to match the new 3-column layout */
+  .mega-panel .mega-col:first-child {
+    display: block; /* Removing the nested grid for simpler vertical alignment */
+  }
+
+  .mega-panel .mega-col:first-child h4 {
+    grid-column: auto;
+  }
+
+  /* Arrow Fix */
+  .mega-panel::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-left: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+}
+
+@media (max-width: 900px){
+.mega-panel{
+  position: static;
+  width: 100%;
+  max-width: none;
+  transform: none;
+  display: none;
+
+  padding: 10px 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+
+  grid-template-columns: 1fr;
+}
+
+  /* Disable hover-based mega menu */
+  nav.primary-nav li.mega:hover .mega-panel{
+    display: none;
+  }
+
+  /* Open on click */
+  nav.primary-nav li.mega.open > .mega-panel{
+    display: block;
+  }
+}
+
+/* Dropdown headings */
+.mega-col h4{
+  margin:6px 10px 12px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  color:#6c757d;
+}
+
+/* Dropdown links */
+.mega-col a{
+  display:flex;
+  align-items:center;
+
+  padding:14px 16px;
+  border-radius:10px;
+
+  font-size:15px;
+  font-weight:600;
+  line-height:1.2;
+
+  color:var(--dark);
+  text-decoration:none;
+
+  transition:background .2s ease, color .2s ease;
+}
+
+.mega-col a:hover{
+  background:rgba(10,102,194,.08);
+  color:var(--primary);
+}
+
+    /* ===== HERO ===== */
+/* ===== FULL BACKGROUND VIDEO HERO ===== */
+
+.hero{
+
+  position:relative;
+  min-height: calc(100vh - var(--nav-height));
+  width:100%;
+  overflow:hidden;
+}
+
+/* Video layer */
+.hero-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:1;
+}
+
+
+/* Video fills entire hero */
+.hero-bg-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:1;
+}
+
+/* Overlay for contrast */
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    90deg,
+    rgba(13,27,42,.85) 0%,
+    rgba(13,27,42,.65) 40%,
+    rgba(13,27,42,.35) 65%,
+    rgba(13,27,42,.15) 100%
+  );
+  z-index:2;
+}
+
+/* Text layer */
+/* ===== HERO BASE SAFETY ===== */
+.hero{
+  position:relative;
+}
+
+/* ===== FLOATING CONTENT ===== */
+.hero-content--floating{
+  position:relative;
+  z-index:3;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:0 8%;
+  transform: translateY(200px);
+  color:#fff;
+}
+
+/* ===== TITLE ===== */
+.hero-title{
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+
+  font-size: 4.4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin: 0 auto;
+
+  color: #ffffff;
+
+  text-shadow:
+    0 3px 6px rgba(0,0,0,.6), 0 10px 26px rgba(0,0,0,.5), 0 22px 48px rgba(0,0,0,.4);
+}
+
+
+/* ===== DESCRIPTION ===== */
+.hero-desc{
+  margin-top: 40px;
+  font-size:1.5rem;
+  line-height:1;
+  color:rgba(255,255,255,.88);
+
+  text-shadow:
+    0 1px 3px rgba(0,0,0,.6),
+    0 6px 16px rgba(0,0,0,.45);
+}
+
+
+/* ===== CTA (PRIMARY – INDUSTRIAL PREMIUM) ===== */
+.hero-btn--primary{
+  margin-top: 20px;
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  /* Slightly deeper, richer blue */
+  background:#000; /* refined primary */
+  color:#ffffff;
+
+  padding:15px 40px;
+  border-radius:6px;
+
+  font-weight:600;
+  letter-spacing:.02em;
+  text-decoration:none;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.hero-btn--primary:hover{
+  background:#084d99; /* darker steel-blue */
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.22) inset,
+    0 22px 48px rgba(11,93,179,.55);
+}
+
+.hero-btn--primary:active{
+  transform:translateY(0);
+
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.12) inset,
+    0 10px 22px rgba(11,93,179,.35);
+}
+
+/* ===== CUSTOMER AUTO SCROLL STRIP ===== */
+
+.customer-strip{
+  width:100%;
+  overflow:hidden;
+  background:#0d1b2a;
+  padding:22px 0;
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.customer-track{
+  display:flex;
+  width:max-content;
+  animation: customer-scroll 45s linear infinite;
+}
+
+.customer-strip:hover .customer-track{
+  animation-play-state: paused;
+}
+
+.customer-track span{
+  flex:0 0 auto;
+  margin:0 34px;
+  font-size:1rem;
+  font-weight:600;
+  color:#ffffff;
+  opacity:.85;
+  letter-spacing:.4px;
+  white-space:nowrap;
+}
+
+.customer-track span:hover{
+  opacity:1;
+  color:#0a66c2;
+}
+
+@keyframes customer-scroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .customer-track span{
+    margin:0 22px;
+    font-size:.9rem;
+  }
+}
+
+
+/* HEADER OFFSET */
+main{ padding-top: var(--nav-height) !important; }
+
+
+
+    /* ===== OUR MACHINERY (tilt cards + swiper) ===== */
+    .our-machinery{ background: var(--white); color: var(--dark); padding: 60px 10%; text-align: center; margin-bottom: 90px; }
+    .our-machinery h2{ font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+    .our-machinery .subtitle{ color: var(--muted); margin-bottom: 40px; }
+
+    .machinery-card{ display:block;background:#f4f8fc;border:1px solid rgba(13,27,42,0.06);border-radius:12px;padding:20px;text-align:center;transform-style:preserve-3d;transition:transform .15s ease, box-shadow .15s ease;cursor:pointer;text-decoration:none;color:inherit;will-change:transform;}
+    .machinery-card img{width:100%;height:180px;object-fit:cover;border-radius:10px;margin-bottom:15px;pointer-events:none;}
+    .machinery-card h3{font-size:1.2rem;color:var(--primary);margin-bottom:12px;}
+    .machinery-card ul{list-style:none;padding:0;margin:0;}
+    .machinery-card ul li{font-size:.95rem;color:var(--muted);margin:6px 0;}
+    .machinery-card:hover{box-shadow:0 10px 28px rgba(13,27,42,0.1);}
+
+    .our-machinery .swiper{ padding: 10px 60px 46px; overflow: hidden; }
+    .our-machinery .swiper-button-prev,
+    .our-machinery .swiper-button-next{ color: var(--primary); filter: drop-shadow(0 6px 14px rgba(10,102,194,.15)); width:56px; height:56px; z-index:5; }
+    .our-machinery .swiper-button-prev{ left:12px; } .our-machinery .swiper-button-next{ right:12px; }
+    @media (max-width:980px){
+      .our-machinery .swiper{ padding:10px 44px 40px; }
+      .our-machinery .swiper-button-prev,.our-machinery .swiper-button-next{ width:44px;height:44px; }
+    }
+    .our-machinery .swiper-pagination-bullet-active{ background: var(--primary); }
+
+    /* ===== OUR SERVICES ===== */
+    .services{
+      padding:80px 6%;
+      background:#f9fbff;
+      display:grid;
+      grid-template-columns: 1.1fr 1fr; 
+      gap:48px;
+      align-items:center;
+    }
+    .services-copy h2{font-size:2.6rem;color:#0a66c2;margin:0 0 10px;}
+    .services-copy .subtitle{color:#6c757d;margin:0 0 22px;font-size:1.12rem;}
+    .services-points{margin:0 0 22px 0;padding:0;list-style:none}
+    .services-points li{margin:10px 0;padding-left:26px;position:relative;color:#0d1b2a}
+    .services-points li::before{
+      content:""; position:absolute; left:0; top:.55em;
+      width:12px; height:12px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #0a66c2, #084d99);
+      box-shadow:0 0 0 4px rgba(10,102,194,.12);
+    }
+    .svc-cta{
+      display:inline-block; background:#0a66c2; color:#fff; text-decoration:none;
+      padding:12px 20px; border-radius:28px; font-weight:700;
+      box-shadow:0 8px 18px rgba(10,102,194,.18);
+    }
+    .svc-cta:hover{background:#084d99; transform:translateY(-2px)}
+
+    /* Right stack area */
+    .services-stack{display:flex; justify-content:center}
+    .card-swap-container{
+      position:relative;
+      width:400px; height:300px;
+      perspective:1000px;
+    }
+
+    /* Cards (same look) */
+    .card{
+      position:absolute; top:50%; left:50%;
+      width:500px; height:380px;
+      padding:30px 24px; border-radius:16px; color:#fff;
+      transform-style:preserve-3d; backface-visibility:hidden; overflow:hidden;
+      display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+      box-shadow:0 20px 50px rgba(0,0,0,.28);
+    }
+    .card h3{font-size:1.8rem;margin:0 0 12px}
+    .card p{font-size:1.05rem;line-height:1.55;max-width:380px;margin:0}
+
+    .c1{background:linear-gradient(135deg,#0a66c2,#084d99);}
+    .c2{background:linear-gradient(135deg,#0d1b2a,#0a66c2);}
+    .c3{background:linear-gradient(135deg,#084d99,#0a66c2);}
+    .c4{background:linear-gradient(135deg,#0a66c2,#0d1b2a);}
+
+    /* Spotlight */
+    .spotlight{
+      position:absolute; inset:0;
+      background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.25),transparent 60%);
+      opacity:0; transition:opacity .25s;
+    }
+    .card:hover .spotlight{opacity:1;}
+    .card:hover{transform:scale(1.02) rotateX(2deg) rotateY(-2deg);}
+
+    /* Responsive */
+    @media (max-width: 1100px){
+      .services{grid-template-columns:1fr; text-align:center}
+      .services-stack{justify-content:center}
+    }
+    @media(max-width:768px){
+      .card-swap-container{transform:scale(.86)}
+      .card{width:92vw; height:340px;}
+    }
+    /* ===== FOLLOW US / FOOTER ===== */
+    .follow-us{position: relative;display: flex;align-items: center;justify-content: flex-start;height: 60vh;padding: 40px 6%;
+      color: var(--white);overflow: hidden;background: url('/media/hero.jpg') center right/cover no-repeat;background-color: #0b0f12;}
+    .follow-us::before{content: "";position: absolute;inset: 0;background: linear-gradient(90deg, rgba(5,10,15,0.65) 0%, rgba(5,10,15,0.50) 35%, rgba(5,10,15,0.20) 100%);z-index: 0;pointer-events: none;}
+    .follow-content{position: relative;z-index: 1;max-width: 640px;color: var(--white);}
+    .follow-content h4{margin: 0 0 6px 0;color: rgba(255,255,255,0.92);font-weight: 500;text-shadow: 0 2px 6px rgba(0,0,0,0.6);}
+    .follow-content h2{margin: 0 0 12px 0;font-size: 2.2rem;color: var(--primary);font-weight: 700;text-shadow: 0 6px 18px rgba(0,0,0,0.6);line-height: 1.05;}
+    .follow-content p{margin: 0 0 16px 0;color: rgba(255,255,255,0.92);max-width: 520px;font-size: 1rem;text-shadow: 0 3px 10px rgba(0,0,0,0.45);}
+    .follow-btn{display: inline-block;background: var(--primary);color: var(--white);padding: 12px 22px;border-radius: 30px;text-decoration: none;font-weight: 700;box-shadow: 0 6px 16px rgba(10,102,194,0.18);transition: transform .2s ease, box-shadow .2s ease;}
+    .follow-btn:hover{background: var(--primary-dark);transform: translateY(-3px);box-shadow: 0 10px 28px rgba(10,102,194,0.22);}
+    .footer{background:var(--dark);color:#fff;padding:50px 6% 30px;}
+
+.nav-toggle{
+  display:none;
+}
+
+
+    /* ================= MOBILE OVERRIDES ================= */
+@media (max-width: 900px) {
+
+  /* Safety: horizontal scroll band */
+  html, body{
+    overflow-x: hidden;
+  }
+
+  /* Header height chhoti */
+  :root{
+    --nav-height: 76px;
+  }
+
+  /* Header spacing */
+  .nav-row{
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  /* Logo + text shrink (text change nahi, size change) */
+  .brand img{
+    height: 42px;
+  }
+.hero-title{
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  .title{
+    font-size: 18px;
+    line-height: 1.1;
+  }
+
+  .brand .subtitle{
+    font-size: 12px;
+  }
+.nav-toggle{
+    display:block;
+    background:none;
+    border:none;
+    font-size:28px;
+    cursor:pointer;
+    color:var(--dark);
+  }
+
+  header.site-header.scrolled .nav-toggle{
+    color:#fff;
+  }
+
+  nav.primary-nav{
+    position:absolute;
+    top:var(--nav-height);
+    left:0;
+    width:100%;
+    background:#fff;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+  }
+
+  nav.primary-nav.open{
+    max-height:90vh;
+  }
+
+  nav.primary-nav ul{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:12px;
+  }
+
+  nav.primary-nav a,
+  nav.primary-nav .mega-btn{
+    width:100%;
+    justify-content:flex-start;
+  }
+}
+
+  /* Hero control */
+  .hero{
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .hero-content--floating{
+    padding: 90px 18px 48px;
+  }
+
+
+  .hero-desc{
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  /* Heavy tilt effects off on mobile */
+  .machinery-card{
+    transform: none !important;
+    box-shadow: 0 10px 22px rgba(13,27,42,.08);
+  }
+
+  /* Services stack vertically */
+  @media (max-width: 900px){
+
+  .services{
+    display: block;
+    padding: 40px 5%;
+    gap: 28px;
+     width: 100%;
+  overflow: visible;
+  overflow-x: visible;
+  }
+.services-copy{
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0;
+  box-sizing: border-box;
+
+}
+
+  /* Keep stack centered */
+  .services-stack{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 220px;
+  }
+
+  /* Reduce visual size, don’t restructure */
+  .card-swap-container{
+    transform: scale(0.75) translateX(0);
+      margin-left: auto;
+      margin-right: auto;
+      height: 260px;
+  }
+.card-swap-container > .card{
+  transform: scale(0.75);
+  transform-origin: center top;
+}
+  /* Freeze 3D motion */
+  .card{
+    pointer-events: none;
+  }
+
+}
+
+/* ================= END MOBILE OVERRIDES ================= */
+
+
+  </style>
+</head>
+
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="nav-row">
+    <a href="/home/" class="brand">
+      <img src="/media/logo with bg.jpg" alt="Sehdev logo">
+      <div>
+        <span class="title">Sehdev Machine Tools (India)</span><br>
+        <small class="subtitle">Precision | Reliability</small>
+      </div>
+    </a>
+<button class="nav-toggle" aria-label="Toggle menu">
+  ☰
+</button>
+
+    <nav class="primary-nav">
+      <ul>
+        <li><a href="/home/">Home</a></li>
+        <li><a href="/home/aboutus/">About Us</a></li>
+
+        <!-- Products mega menu -->
+        <li class="mega">
+          <a href="{% url 'products' %}" class="mega-btn">Products ▾</a>
+          <div class="mega-panel">
+            <div class="mega-col">
+              <h4>Machines</h4>
+              <a href="{% url 'LabellingMachine_view' %}">Labelling Machine</a>
+              <a href="{% url 'SealingMachine_view' %}">Sealing Machine</a>
+              <a href="{% url 'FillingMachine_view' %}">Filling Machine</a>
+              <a href="{% url 'Ancillaryunits_view' %}">Ancillary Units</a>
+              <a href="{% url 'washing_units_view' %}">Washing Units</a>
+              <a href="{% url 'Conveyorsystems_view' %}">Conveyor System</a>
+            </div>
+            <div class="mega-col">
+              <h4>Components</h4>
+              <a href="{% url 'Nozzles_view' %}">Nozzles &amp; Needles</a>
+              <a href="{% url 'Mechanicalseals_view' %}">Mechanical Seals</a>
+              <a href="{% url 'Rubbercomponents_view' %}">Rubber Components</a>
+              <a href="{% url 'ChangeParts_view' %}">Change Parts</a>
+            </div>
+            <div class="mega-col">
+              <h4>Miscellaneous</h4>
+              <a href="{% url 'Misc_view' %}">Miscellaneous Components</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="mega">
+          <a href="/home/services/" class="mega-btn">Services ▾</a>
+          <div class="mega-panel">
+            <div class="mega-col">
+              <a href="/home/services/" class="service"><h4>Design Customization &amp; Reverse Engineering</h4></a>
+            </div>
+            <div class="mega-col">
+              <a href="/home/services/" class="service"><h4>Product Refurbishment</h4></a>
+            </div>
+            
+          </div>
+        </li>
+        <li><a href="https://maps.app.goo.gl/CpQA18PR5k3FDf7P8">Location</a></li>
+        <li><a href="/home/contactus/">Contact Us</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+<section class="hero">
+
+  <!-- Background Video -->
+  <video
+    class="hero-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="/media/hero.jpg">
+    <source src="/media/Untitled video - Made with Clipchamp.mp4" type="video/mp4">
+  </video>
+
+  <!-- Dark overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- Floating text -->
+  <div class="hero-content--floating">
+    <h1 class="hero-title">
+      Precision Parts  Seamless Performance    </h1>
+
+    <p class="hero-desc">
+      Filling, Labelling, Sealing, Conveyor Systems and custom-engineered change parts —
+      built for continuous, high-reliability production lines.
+    </p>
+
+    <a href="{% url 'enquiry' %}" class="hero-btn--primary">
+      Request a Quote
+    </a>
+  </div>
+
+</section>
+
+
+
+<!-- Client strip -->
+
+<section class="customer-strip">
+  <div class="customer-track">
+
+    <!-- CLIENT LIST -->
+    <span>Dr. Reddy’s</span>
+    <span>Dabur</span>
+    <span>Fresenius Kabi</span>
+    <span>ITC Limited</span>
+    <span>Diageo</span>
+    <span>Glenmark</span>
+    <span>Ranbaxy Laboratories</span>
+    <span>Cadbury</span>
+    <span>Mankind</span>
+    <span>Brooks Laboratories</span>
+    <span>Sentiss</span>
+    <span>Ayurvet</span>
+    <span>Cipla</span>
+    <span>Zeiss Pharma</span>
+    <span>Ind-Swift</span>
+    <span>Ashoka Corp</span>
+    <span>Abbott</span>
+    <span>Piramal</span>
+    <span>Alembic</span>
+    <span>Tirupati</span>
+
+    <!-- DUPLICATE FOR INFINITE LOOP -->
+    <span>Dr. Reddy’s</span>
+    <span>Dabur</span>
+    <span>Fresenius Kabi</span>
+    <span>ITC Limited</span>
+    <span>Diageo</span>
+    <span>Glenmark</span>
+    <span>Ranbaxy Laboratories</span>
+    <span>Cadbury</span>
+    <span>Mankind</span>
+    <span>Brooks Laboratories</span>
+    <span>Sentiss</span>
+    <span>Ayurvet</span>
+    <span>Cipla</span>
+    <span>Zeiss Pharma</span>
+    <span>Ind-Swift</span>
+    <span>Ashoka Corp</span>
+    <span>Abbott</span>
+    <span>Piramal</span>
+    <span>Alembic</span>
+    <span>Tirupati</span>
+
+  </div>
+</section>
+
+
+
+  <!-- OUR MACHINERY (SWIPER) -->
+  <section class="our-machinery">
+    <h2>Our Products</h2>
+    <p class="subtitle">Discover our wide range of machines engineered for performance and reliability</p>
+
+    <div class="swiper ourProductsSwiper">
+      <div class="swiper-wrapper">
+        
+        <div class="swiper-slide">
+          <a href="{% url 'Nozzles_view' %}" class="machinery-card">
+            <img src="/media/filling.jpg" alt="Nozzles & Needles">
+            <h3>Nozzles &amp; Needles</h3>
+            <ul><li>Accurate flow</li><li>Clean dispensing</li><li><strong>Consistency</strong></li></ul>
+          </a>
+        </div>
+        
+        <div class="swiper-slide">
+          <a href="{% url 'Mechanicalseals_view' %}" class="machinery-card">
+            <img src="/media/download-removebg-preview (1).png" alt="Mechanical Seals">
+            <h3>Mechanical Seals</h3>
+            <ul><li>Leak-proof design</li><li>Heavy-duty usage</li><li><strong>Durable</strong></li></ul>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="{% url 'Conveyorsystems_view' %}" class="machinery-card">
+            <img src="/media/roller_conveyor_system.jpeg" alt="Conveyor System">
+            <h3>Conveyor System</h3>
+            <ul><li>Smooth transfer</li><li>Modular layouts</li><li><strong>Safe & quick</strong></li></ul>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="{% url 'Rubbercomponents_view' %}" class="machinery-card">
+            <img src="/media/Rubber_Bellows-removebg-preview.png" alt="Rubber Components">
+            <h3>Rubber Components</h3>
+            <ul><li>Quality elastomers</li><li>Perfect fit</li><li><strong>Resilient</strong></li></ul>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="{% url 'ChangeParts_view' %}" class="machinery-card">
+            <img src="/media/change parts/Romaco Change Parts (2).jpg" alt="Change Parts">
+            <h3>Change Parts</h3>
+            <ul>
+              <li>Custom Precision</li>
+              <li>Quick Changeover</li>
+              <li><strong>OEM Compatible</strong></li>
+            </ul>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="{% url 'Misc_view' %}" class="machinery-card">
+            <img src="/media/Worm Crushers.png" alt="Miscellaneous">
+            <h3>Miscellaneous</h3>
+            <ul>
+                <li>Specialized parts</li>
+                <li>Custom solutions</li>
+                <li><strong>High Precision</strong></li>
+            </ul>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="{% url 'SealingMachine_view' %}" class="machinery-card">
+            <img src="/media/vial sealing.png" alt="Sealing Machine">
+            <h3>Sealing Unit</h3>
+            <ul><li>Secure sealing solutions</li><li>Reliable packaging</li><li><strong>Precision</strong></li></ul>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="{% url 'LabellingMachine_view' %}" class="machinery-card">
+            <img src="/media/gumming-removebg-preview.png" alt="Labelling Machine">
+            <h3>Labelling Unit</h3>
+            <ul><li>Fast & precise</li><li>All container types</li><li><strong>Durability</strong></li></ul>
+          </a>
+        </div>
+        <div class="swiper-slide">
+          <a href="{% url 'FillingMachine_view' %}" class="machinery-card">
+            <img src="/media/filling bg.jpg" alt="Filling Machine">
+            <h3>Filling Unit</h3>
+            <ul><li>Efficient systems</li><li>Liquids, powders & more</li><li><strong>High Output</strong></li></ul>
+          </a>
+        </div>
+      </div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+  <!-- OUR SERVICES -->
+<section class="services">
+  <div class="services-copy">
+    <h2>Other Services</h2>
+    <p class="subtitle">End-to-end engineering — from concept to production.</p>
+
+    <ul class="services-points">
+      <li><strong>Design & Customization</strong> – CAD/CAM driven, application-tuned architectures.</li>
+      <li><strong>Reverse Engineering</strong> – 3D scan → parametric model → drop-in replacement.</li>
+      <li><strong>Product Refurbishment</strong> – Precision overhaul, zero-hour restoration, and structural life-cycle extension.</li>
+    </ul>
+
+    <a href="/home/services/" class="svc-cta">Discuss your project</a>
+  </div>
+
+  <div class="services-stack">
+    <div class="card-swap-container" id="serviceSwap">
+      <div class="card c1">
+        <div class="spotlight"></div>
+        <h3>Design & Customization</h3>
+        <p>Tailor-made machine architectures using advanced CAD/CAM, optimized for your line and KPIs.</p>
+      </div>
+      <div class="card c2">
+        <div class="spotlight"></div>
+        <h3>Reverse Engineering</h3>
+        <p>Digitize legacy parts or assemblies with precision 3D scanning and parametric modeling.</p>
+      </div>
+      <div class="card c3">
+        <div class="spotlight"></div>
+        <h3>Product Refurbishment</h3>
+        <p>Restore legacy equipment to zero-hour standards with structural overhauls and performance-enhancing retrofits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- FOLLOW US  -->
+  <section class="follow-us" aria-labelledby="follow-heading">
+    <div class="follow-content">
+      <h4>Connect with Us</h4>
+      <h2 id="follow-heading">Follow <br> Us</h2>
+      <p>Stay up-to-date with the latest news, product updates, and industry insights from Sehdev Machine Tools.</p>
+      <a href="#" class="follow-btn">Join Our Community</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>©️ 2025 Sehdev Machine Tools. All rights reserved.</p>
+  </footer>
+</main>
+
+<!-- Swiper JS -->
+ 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Swiper init -->
+<script>
+  const productsSwiper = new Swiper('.ourProductsSwiper', {
+    loop: true,
+
+    navigation: {
+      nextEl: '.ourProductsSwiper .swiper-button-next',
+      prevEl: '.ourProductsSwiper .swiper-button-prev',
+    },
+
+    pagination: {
+      el: '.ourProductsSwiper .swiper-pagination',
+      clickable: true,
+    },
+
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        spaceBetween: 16
+      },
+      640: {
+        slidesPerView: 2,
+        slidesPerGroup: 1,
+        spaceBetween: 20
+      },
+      980: {
+        slidesPerView: 3,
+        slidesPerGroup: 1,
+        spaceBetween: 24
+      },
+      1280: {
+        slidesPerView: 4,
+        slidesPerGroup: 4,
+        spaceBetween: 30
+      }
+    }
+  });
+</script>
+
+
+<!-- Tilted Card Animation -->
+<script>
+  document.querySelectorAll(".machinery-card").forEach(card => {
+    card.style.willChange = "transform";
+    card.addEventListener("mousemove", e => {
+      const r = card.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      const rx = ((y - r.height/2) / (r.height/2)) * 10;
+      const ry = ((x - r.width/2) / (r.width/2)) * -10;
+      card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.05)`;
+      card.style.boxShadow = `${-ry}px ${rx}px 20px rgba(0,0,0,0.2)`;
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+      card.style.boxShadow = "0 10px 25px rgba(0,0,0,0.1)";
+    });
+  });
+</script>
+
+<!-- CARD SWAP & SPOTLIGHT EFFECT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  const container = document.getElementById("serviceSwap");
+  const cards = Array.from(container.querySelectorAll(".card"));
+  const delay = 5000, cardDist = 60, vertDist = 70, skew = 6, ease = "elastic.out(0.6,0.9)";
+  let order = cards.map((_,i)=>i), tl, interval;
+
+  function setPos(){
+    cards.forEach((el,i)=>{
+      gsap.set(el,{
+        x:i*cardDist, y:-i*vertDist, z:-i*cardDist*1.5,
+        xPercent:-50, yPercent:-50, skewY:skew, zIndex:cards.length-i
+      });
+    });
+  }
+  function swap(){
+    if(order.length<2) return;
+    const [front,...rest]=order, elFront=cards[front];
+    tl=gsap.timeline();
+    tl.to(elFront,{y:"+=500",duration:2,ease:ease});
+    tl.addLabel("promote","-=1.8");
+    rest.forEach((idx,i)=>{
+      const x=i*cardDist, y=-i*vertDist, z=-i*cardDist*1.5;
+      gsap.set(cards[idx],{zIndex:cards.length-i});
+      tl.to(cards[idx],{x,y,z,duration:2,ease:ease},"promote+="+i*0.15);
+    });
+    const backIdx=cards.length-1;
+    tl.call(()=>gsap.set(elFront,{zIndex:cards.length-backIdx}),null,"promote+=1");
+    tl.to(elFront,{
+      x:backIdx*cardDist, y:-backIdx*vertDist, z:-backIdx*cardDist*1.5,
+      duration:2, ease:ease
+    },"promote+=1");
+    tl.call(()=>{order=[...rest,front];});
+  }
+  setPos(); swap(); interval=setInterval(swap,delay);
+  container.addEventListener("mouseenter",()=>{tl?.pause(); clearInterval(interval);});
+  container.addEventListener("mouseleave",()=>{tl?.play(); interval=setInterval(swap,delay);});
+})();
+/* spotlight follow */
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100)+'%');
+    card.style.setProperty('--my', ((e.clientY-r.top)/r.height*100)+'%');
+  });
+});
+</script>
+<script>
+(function(){
+  const grid = document.querySelector('.image-grid.mode--invisible');
+  if(!grid) return;
+  const base = Array.from(grid.children);
+  const targetCells = 12;  // 4x3
+  let i = 0;
+  while(grid.children.length < targetCells){
+    const clone = base[i % base.length].cloneNode(true);
+    const img = clone.querySelector('img');
+    if(img) img.loading = 'lazy';
+    grid.appendChild(clone);
+    i++;
+  }
+})();
+</script>
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const primaryNav = document.querySelector('nav.primary-nav');
+
+  if (navToggle && primaryNav) {
+
+    // Toggle on hamburger click
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent document click
+      primaryNav.classList.toggle('open');
+    });
+
+    // Prevent clicks inside nav from closing it
+    primaryNav.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Close when clicking anywhere outside
+    document.addEventListener('click', () => {
+      primaryNav.classList.remove('open');
+    });
+
+    // Close menu when any link is clicked
+    primaryNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        primaryNav.classList.remove('open');
+      });
+    });
+
+  }
+</script>
+<script>
+document.querySelectorAll('.mega-btn').forEach(btn=>{
+  btn.addEventListener('click', e=>{
+    if(window.innerWidth <= 900){
+      e.preventDefault();
+      btn.parentElement.classList.toggle('open');
+    }
+  });
+});
+</script>
+
+
+</body>
+</html>

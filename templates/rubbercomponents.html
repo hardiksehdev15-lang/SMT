@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rubber Components | Sehdev Machine Tools</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#0f172a;
+  --text:#334155;
+  --muted:#64748b;
+  --border:#e6ebf2;
+  --bg:#ffffff;
+  --bg-soft:#f7f9fc;
+  --cta:#020617;
+  --primary: #0a66c2;
+  --nav-height: 112px;
+  --dark: #0d1b2a;
+}
+
+body{
+  margin:0;
+  font-family:"Inter","Segoe UI",system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+/*header*/
+    header.site-header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1400;
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      background: rgba(255, 255, 255, 0.8);
+      border-bottom: 1px solid rgba(13, 27, 42, 0.06);
+      transition: background .25s ease, box-shadow .25s ease;
+    }
+
+    header.site-header.scrolled {
+      background: rgba(255, 255, 255, 0.8); 
+      backdrop-filter: blur(12px) saturate(160%);
+      color: var(--dark);
+      box-shadow: 0 6px 22px rgba(10,102,194,0.12);
+    }
+
+    .nav-row {
+      height: var(--nav-height);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%; gap: 24px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand img { height: 60px; border-radius: 6px; }
+    
+    .title {
+      font-family: 'Inter', sans-serif;
+      font-size: 33px; font-weight: 570; letter-spacing: 0.2px; line-height: 1.05;
+      text-transform: uppercase; color: #000;
+    }
+
+    header.site-header.scrolled .brand .title { color: #000; }
+    .brand .subtitle { font-size: 15px; font-weight: 550; color: #000; }
+    header.site-header.scrolled .brand .subtitle { color: var(--muted); }
+
+    /* PRIMARY NAV */
+    nav.primary-nav ul { list-style: none; display: flex; align-items: center; gap: 6px; margin: 0; padding: 0; }
+    nav.primary-nav a, nav.primary-nav .mega-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 14px 20px; border-radius: 8px;
+      font-size: 16px; font-weight: 200; line-height: 1;
+      color: var(--dark); text-decoration: none;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    header.site-header.scrolled nav.primary-nav a,
+    header.site-header.scrolled nav.primary-nav .mega-btn { color:var(--dark); }
+
+    nav.primary-nav a:hover, nav.primary-nav .mega-btn:hover, nav.primary-nav a.active {
+      background: rgba(10, 102, 194, .08);
+      color: var(--primary);
+    }
+    
+    header.site-header.scrolled nav.primary-nav a.active {
+        background: rgba(10, 102, 194, .08);
+        color: var(--primary);
+    }
+
+    /* MEGA MENU */
+    nav.primary-nav li.mega { position: relative; }
+    .mega-panel {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      top: calc(100% + 1px); width: 800px;
+      background: #fff; border: 1px solid rgba(13,27,42,.06); border-radius: 14px;
+      padding: 22px; box-shadow: 0 20px 50px rgba(13,27,42,.12);
+      display: none; gap: 18px; grid-template-columns: repeat(3, 1fr); z-index: 1500;
+    }
+    nav.primary-nav li.mega:hover .mega-panel { display: grid; }
+    .mega-col h4 { margin: 6px 10px 12px; font-size: 13px; font-weight: 700;letter-spacing: 1.2px; text-transform: uppercase; color: #6c757d; border-bottom: 1px solid #f0f0f0; padding-bottom: 5px;}
+    .mega-col a { display: block; padding: 10px 16px; border-radius: 10px; font-size: 14.5px; font-weight: 400; color: var(--dark); text-decoration: none; }
+    .mega-col a:hover { background: rgba(10,102,194,.08); color: var(--primary); }
+
+/* ===== HERO ===== */
+.hero{
+  background:var(--bg);
+  padding:140px 2rem 70px;
+  border-bottom:1px solid var(--border);
+}
+.hero .container{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:60px;
+  align-items:center;
+}
+.hero h1{
+  font-size:2.8rem;
+  color:var(--navy);
+  margin-bottom:14px;
+  font-weight:700;
+}
+.hero p{
+  max-width:520px;
+  line-height:1.7;
+  color:var(--muted);
+}
+.hero-actions{
+  margin-top:26px;
+}
+.hero-actions a{
+  display:inline-block;
+  padding:14px 22px;
+  border-radius:6px;
+  font-weight:600;
+  text-decoration:none;
+}
+.hero-primary{
+  background:var(--cta);
+  color:#fff;
+}
+.hero-secondary{
+  margin-left:12px;
+  border:1px solid var(--border);
+  color:var(--navy);
+}
+
+/* ===== CONTENT ===== */
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:70px 2rem;
+}
+
+/* ===== CARD GRID LAYOUT ===== */
+.components-showcase {
+    padding: 60px 2rem;
+    background: #f8fafc;
+}
+
+.components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.component-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensures all cards in a row are same height */
+}
+
+.component-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+}
+
+.component-img-container {
+    width: 100%;
+    height: 220px; /* Consistent height for rubber part images */
+    padding: 20px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.component-img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.component-info {
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.component-info h3 {
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin-bottom: 10px;
+}
+
+.component-info p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.machine-meta {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.spare-enquiry-btn {
+    margin-top: auto;
+    display: inline-block;
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid var(--navy);
+    color: var(--navy);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.spare-enquiry-btn:hover {
+    background: var(--navy);
+    color: #fff;
+}
+/* ===== FOOTER CTA ===== */
+.final-cta{
+  text-align:center;
+  padding:90px 2rem;
+  background:#fff;
+}
+.final-cta h2{
+  color:var(--navy);
+}
+.final-cta a{
+  margin-top:20px;
+  display:inline-block;
+  background:var(--cta);
+  color:#fff;
+  padding:14px 28px;
+  border-radius:6px;
+  text-decoration:none;
+}
+.nav-toggle{
+  display:none;
+  background:none;
+  border:none;
+  font-size:28px;
+  cursor:pointer;
+}
+
+/* ================= RUBBER COMPONENTS MOBILE OVERRIDES ================= */
+@media (max-width: 900px){
+
+  :root{
+    --nav-height: 76px;
+  }
+
+  html, body{
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAVBAR ---------- */
+  .nav-toggle{
+    display:block;
+    color:var(--dark);
+  }
+
+  .brand img{
+    height:40px;
+  }
+
+  .title{
+    font-size:18px;
+    line-height:1.1;
+  }
+
+  .brand .subtitle{
+    font-size:11px;
+  }
+
+  nav.primary-nav{
+    position:absolute;
+    top:var(--nav-height);
+    left:0;
+    width:100%;
+    background:#fff;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    border-bottom:1px solid rgba(13,27,42,.08);
+  }
+
+  nav.primary-nav.open{
+    max-height:90vh;
+  }
+
+  nav.primary-nav ul{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:12px 6%;
+  }
+
+  nav.primary-nav a,
+  nav.primary-nav .mega-btn{
+    width:100%;
+    justify-content:flex-start;
+  }
+
+  /* Disable mega menus on mobile */
+  nav.primary-nav li.mega .mega-panel{
+    display:none !important;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:calc(var(--nav-height) + 24px) 6% 40px;
+  }
+
+  .hero .container{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+
+  .hero h1{
+    font-size:2.1rem;
+  }
+
+  .hero p{
+    font-size:1rem;
+    line-height:1.6;
+  }
+
+  .hero-actions{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .hero-actions a{
+    width:100%;
+    text-align:center;
+    margin:0 !important;
+  }
+
+  /* ---------- PRODUCT BLOCKS ---------- */
+  main#items{
+    padding:40px 6%;
+  }
+
+  .machine-block{
+    grid-template-columns:1fr;
+    gap:26px;
+    padding:40px 0;
+  }
+
+  .machine-block h3{
+    font-size:1.5rem;
+  }
+
+  .machine-actions a.primary{
+    width:100%;
+    text-align:center;
+  }
+  .machine-block img {
+    height: 250px !important; 
+    max-width: 100% !important;
+    object-fit: contain !important;
+    margin-top: 20px;         
+  }
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{
+    padding:60px 6%;
+  }
+
+  .final-cta a{
+    width:100%;
+    text-align:center;
+  }
+}
+/* ================= END RUBBER COMPONENTS MOBILE OVERRIDES ================= */
+
+</style>
+</head>
+
+<body>
+
+<header class="site-header" id="siteHeader">
+    <div class="nav-row">
+      <a href="/home/" class="brand">
+        <img src="/media/logo with bg.jpg" alt="Sehdev logo">
+        <div>
+          <span class="title">Sehdev Machine Tools (India)</span><br>
+          <small class="subtitle">Precision | Reliability</small>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+
+
+      <nav class="primary-nav">
+        <ul>
+          <li><a href="/home/">Home</a></li>
+          <li><a href="/home/aboutus/" class="mega-btn">About Us</a></li>
+
+          <li class="mega">
+            <a href="{% url 'products' %}" class="active">Products ▾</a>
+            <div class="mega-panel">
+              <div class="mega-col">
+                <h4>Machines</h4>
+                <a href="{% url 'LabellingMachine_view' %}">Labelling Machine</a>
+                <a href="{% url 'SealingMachine_view' %}">Sealing Machine</a>
+                <a href="{% url 'FillingMachine_view' %}">Filling Machine</a>
+                <a href="{% url 'Ancillaryunits_view' %}">Ancillary Units</a>
+                <a href="{% url 'washing_units_view' %}">Washing Units</a>
+                <a href="{% url 'Conveyorsystems_view' %}">Conveyor System</a>
+              </div>
+              <div class="mega-col">
+                <h4>Components</h4>
+                <a href="{% url 'Nozzles_view' %}">Nozzles & Needles</a>
+                <a href="{% url 'Mechanicalseals_view' %}">Mechanical Seals</a>
+                <a href="{% url 'Rubbercomponents_view' %}">Rubber Components</a>
+                <a href="{% url 'ChangeParts_view' %}">Change Parts</a>
+              </div>
+              <div class="mega-col">
+              <h4>Miscellaneous</h4>
+              <a href="{% url 'Misc_view' %}">Miscellaneous Components</a>
+            </div>
+            </div>
+          </li>
+
+          <li class="mega">
+            <a href="/home/services/" class="mega-btn">Services ▾</a>
+            <div class="mega-panel">
+              <div class="mega-col">
+                <a href="/home/services/"><h4>Design Customization &amp; Reverse Engineering</h4></a>
+              </div>
+              <div class="mega-col">
+                <a href="/home/services/"><h4>Product Refurbishment</h4></a>
+              </div>
+            </div>
+          </li>
+          <li><a href="https://maps.app.goo.gl/CpQA18PR5k3FDf7P8">Location</a></li>
+          <li><a href="/home/contactus/">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="hero">
+  <div class="container">
+    <div>
+      <h1>Precision Rubber Components</h1>
+      <p>
+        High-grade industrial rubber solutions including O-rings, Gaskets, Diaphragms, and Custom Moulded parts designed for durability and chemical resistance.
+      </p>
+      <div class="hero-actions">
+        <a href="{% url 'enquiry' %}" class="hero-primary">Request a Quote</a>
+        <a href="#items" class="hero-secondary">View Product Range</a>
+      </div>
+    </div>
+  </div>
+  </main>
+
+
+<main id="items" class="components-showcase">
+  <div class="components-grid">
+    {% for machine in machines %}
+    <div class="component-card">
+      <div class="component-img-container">
+        <img src="{{ machine.image.url }}" alt="{{ machine.name }}">
+      </div>
+      
+      <div class="component-info">
+        <div class="machine-meta">Industrial Grade</div>
+        <h3>{{ machine.name }}</h3>
+        <p>{{ machine.short_description }}</p>
+        
+        <a href="{% url 'enquiry' %}?product={{ machine.name|urlencode }}&cat=Rubber" class="spare-enquiry-btn">
+          Get Quote
+        </a>
+      </div>
+    </div>
+    {% empty %}
+    <p style="grid-column: 1/-1; text-align: center;">No rubber components currently listed.</p>
+    {% endfor %}
+  </div>
+</main>
+
+<section class="final-cta">
+  <h2>Looking for custom moulded rubber parts?</h2>
+  <a href="{% url 'enquiry' %}">Discuss Your Requirements</a>
+</section>
+
+</body>
+<script>
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.site-header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+</script>
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const primaryNav = document.querySelector('nav.primary-nav');
+
+  if(navToggle && primaryNav){
+    navToggle.addEventListener('click', e => {
+      e.stopPropagation();
+      primaryNav.classList.toggle('open');
+    });
+
+    primaryNav.addEventListener('click', e => e.stopPropagation());
+
+    document.addEventListener('click', () => {
+      primaryNav.classList.remove('open');
+    });
+
+    primaryNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        primaryNav.classList.remove('open');
+      });
+    });
+  }
+</script>
+
+</html>

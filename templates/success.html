@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enquiry Submitted • Sehdev Machine Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Matching your homepage color palette */
+      --brand-blue: #0056b3; 
+      --brand-dark: #0d1b2a;
+      --brand-light: #f8fbff;
+      --accent: #007bff;
+      --text-main: #1a1a1a;
+      --text-muted: #54595f;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--brand-light);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    /* Hero Background matching your machine banner style */
+    .hero-bg {
+      background: linear-gradient(rgba(13, 27, 42, 0.85), rgba(0, 86, 179, 0.7)), 
+                  url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000'); /* Industrial overlay */
+      background-size: cover;
+      background-position: center;
+      padding: 100px 20px 160px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .thankyou-badge {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      display: inline-block;
+      padding: 10px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.3);
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .hero-bg h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    /* Main Container */
+    .wrap {
+      max-width: 750px;
+      margin: -100px auto 60px;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      border-top: 5px solid var(--brand-blue);
+      animation: fadeInUp 1s ease;
+    }
+
+    .card-header {
+      background: #fcfdfe;
+      padding: 30px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-header h2 {
+      font-size: 1.5rem;
+      color: var(--brand-dark);
+      font-weight: 700;
+    }
+
+    .status-icon {
+      width: 50px;
+      height: 50px;
+      background: #e7f3ff;
+      color: var(--brand-blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .summary-content {
+      padding: 30px;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .field-item {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #e5e7eb;
+    }
+
+    .field-label { font-weight: 600; color: var(--brand-dark); }
+    .field-value { color: var(--text-muted); text-align: right; }
+
+    .project-detail-box {
+      background: #f9fafb;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      border-left: 4px solid var(--brand-blue);
+    }
+
+    /* Redirect Progress Bar */
+    .redirect-container {
+      margin: 30px 0 10px;
+      text-align: center;
+    }
+
+    .timer-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    /* Buttons - Aligned with your homepage style */
+    .cta-row {
+      display: flex;
+      gap: 15px;
+      padding: 0 30px 30px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 15px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    .btn-primary {
+      background: var(--brand-blue);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--brand-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--brand-blue);
+      color: var(--brand-blue);
+    }
+
+    .btn-outline:hover {
+      background: #f0f7ff;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .hero-bg h1 { font-size: 2rem; }
+      .cta-row { flex-direction: column; }
+      .field-item { flex-direction: column; text-align: left; }
+      .field-value { text-align: left; margin-top: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero-bg">
+    <div class="thankyou-badge">SUBMISSION SUCCESSFUL</div>
+    <h1>Thank You!</h1>
+    <p>Precision and reliability in every response. Our team will contact you shortly.</p>
+  </section>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="card-header">
+        <h2>Enquiry Summary</h2>
+        <div class="status-icon">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+      </div>
+
+      <div class="summary-content">
+        {% if enquiry %}
+        <div class="fields">
+          <div class="field-item">
+            <span class="field-label">Customer Name</span>
+            <span class="field-value">{{ enquiry.full_name }}</span>
+          </div>
+          <div class="field-item">
+            <span class="field-label">Email Address</span>
+            <span class="field-value">{{ enquiry.email }}</span>
+          </div>
+          <div class="field-item">
+            <span class="field-label">Interested Service</span>
+            <span class="field-value">{{ enquiry.get_service_type_display }}</span>
+          </div>
+          <div class="field-item">
+            <span class="field-label">Location</span>
+            <span class="field-value">{{ enquiry.city }}, {{ enquiry.country }}</span>
+          </div>
+          {% if enquiry.machinery %}
+          <div class="field-item">
+            <span class="field-label">Selected Machinery</span>
+            <span class="field-value">{% for m in enquiry.machinery %}{{ m }}{% if not forloop.last %}, {% endif %}{% endfor %}</span>
+          </div>
+          {% endif %}
+        </div>
+
+        {% if enquiry.project_details %}
+        <div class="project-detail-box">
+          <p style="font-size: 0.8rem; text-transform: uppercase; color: var(--brand-blue); font-weight: 700; margin-bottom: 5px;">Project Requirements:</p>
+          <p style="color: var(--text-muted); font-size: 0.95rem; font-style: italic;">"{{ enquiry.project_details|truncatechars:180 }}"</p>
+        </div>
+        {% endif %}
+        {% endif %}
+
+        <div class="redirect-container">
+          <p class="timer-text">Navigating back to main site in <span id="count" style="font-weight: 800; color: var(--brand-blue);">10</span> seconds...</p>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a href="{% url 'home' %}" class="btn btn-primary" id="goHome">Back to Home</a>
+        <a href="{% url 'enquiry' %}" class="btn btn-outline">New Enquiry</a>
+      </div>
+    </div>
+    
+    <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 20px;">
+      &copy; 2025 Sehdev Machine Tools. Precision | Reliability
+    </p>
+  </div>
+
+  <script>
+    // auto-redirect to home after 10s
+    (function(){
+      var secs = 40, el = document.getElementById('count');
+      var t = setInterval(function(){
+        secs--; if(el) el.textContent = secs;
+        if(secs <= 0){
+          clearInterval(t);
+          window.location = document.getElementById('goHome').href;
+        }
+      }, 1000);
+    })();
+  </script>
+</body>
+</html>

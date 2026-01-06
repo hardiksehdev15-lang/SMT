@@ -1,0 +1,576 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sealing Machines | Sehdev Machine Tools</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0a66c2;
+            --navy: #0f172a;
+            --text: #334155;
+            --muted: #6c757d;
+            --border: rgba(13, 27, 42, 0.06);
+            --white: #ffffff;
+            --nav-height: 112px;
+            --dark: #0d1b2a;
+        }
+
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: var(--white);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ================= HEADER (EXACT ABOUT US MATCH) ================= */
+        header.site-header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1400;
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid var(--border);
+            transition: all .25s ease;
+        }
+
+        .nav-row {
+            height: var(--nav-height);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 6%; gap: 24px;
+        }
+
+        .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .brand img { height: 60px; border-radius: 6px; }
+        
+        .title {
+            font-family: 'Inter', sans-serif;
+            font-size: 33px; font-weight: 600; letter-spacing: 0.2px; line-height: 1.05;
+            text-transform: uppercase; color: #000;
+        }
+        .brand .subtitle { font-size: 15px; font-weight: 550; color: #000; }
+
+        /* PRIMARY NAV */
+        nav.primary-nav ul { list-style: none; display: flex; align-items: center; gap: 6px; margin: 0; padding: 0; }
+        nav.primary-nav a, nav.primary-nav .mega-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 14px 20px; border-radius: 8px;
+            font-size: 16px; font-weight: 500; line-height: 1;
+            color: var(--dark); text-decoration: none;
+            transition: background .25s ease, color .25s ease;
+        }
+
+        nav.primary-nav a:hover, nav.primary-nav .mega-btn:hover {
+            background: rgba(10, 102, 194, .08);
+            color: var(--primary);
+        }
+
+        /* MEGA MENU (EXACT ABOUT US LOGIC) */
+        nav.primary-nav li.mega { position: relative; }
+        .mega-panel {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            top: calc(100% + 1px); width: min(1000px, 92vw);
+            background: #fff; border: 1px solid var(--border); border-radius: 14px;
+            padding: 22px; box-shadow: 0 20px 50px rgba(13,27,42,.12);
+            display: none; gap: 18px; grid-template-columns: repeat(3, 1fr); z-index: 1500;
+        }
+        nav.primary-nav li.mega:hover .mega-panel { display: grid; }
+
+        .mega-col h4 { 
+            margin: 6px 10px 12px; font-size: 13px; font-weight: 700; 
+            text-transform: uppercase; color: #6c757d; 
+            border-bottom: 1px solid #f0f0f0; padding-bottom: 5px;
+        }
+        .mega-col a { 
+            display: block; padding: 10px 16px; border-radius: 10px; 
+            font-size: 15px; font-weight: 600; color: var(--dark); 
+            text-decoration: none; 
+        }
+        .mega-col a:hover { background: rgba(10,102,194,.08); color: var(--primary); }
+
+        /* HERO & CONTENT */
+        main { padding-top: var(--nav-height); }
+        .hero h1 { font-size: 3rem; font-weight: 800; color: var(--dark); line-height: 1.2; margin: 0 0 20px; font-family: 'Inter', sans-serif; }
+        .hero .hero-container{
+            max-width:1500px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:1.3fr 1.2fr;
+            gap:60px;
+            align-items:center;
+            padding: 80px 6%;
+            }
+        .hero-img {
+            width: 100%;
+            max-width: 1800px; 
+            height: auto;
+            display: block;
+            margin-left: auto; 
+        }    
+        .btn-primary { background: var(--dark); color: #fff; padding: 16px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-block; transition: .3s; }
+
+        /* MACHINE LISTINGS */
+        .machine-section { padding: 80px 6%; max-width: 1200px; margin: auto; }
+        .machine-block { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding: 60px 0; border-bottom: 1px solid #f0f0f0; align-items: center; }
+        .machine-image img { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+
+        /* COMPONENTS GRID */
+        .components-section { padding: 100px 6%; background: #f8fafc; }
+        .components-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
+        .component-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 30px; text-align: center; }
+        .comp-img-box { width: 100%; height: 200px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
+        .comp-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .enquire-btn { display: block; width: 100%; padding: 12px; border: 2px solid var(--dark); border-radius: 10px; color: var(--dark); font-weight: 700; text-decoration: none; transition: .3s; }
+        .enquire-btn:hover { background: var(--dark); color: #fff; }
+
+        /* Components Section Styling */
+.components-section {
+    padding: 100px 6%;
+    background: #f8fafc; 
+}
+
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.section-header p {
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
+.section-header h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 40px;
+    text-align: center;
+}
+/* Grid Layout */
+.components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Component Card Design */
+.component-card {
+    background: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    padding: 25px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.component-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    border-color: #000;
+}
+
+/* Image Box - Isse alignment sahi rehti hai */
+.comp-img-box {
+    width: 100%;
+    height: 220px; /* Fixed height for consistency */
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 15px;
+}
+
+.comp-img-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Image stretch nahi hogi */
+    transition: transform 0.5s ease;
+}
+
+.component-card:hover .comp-img-box img {
+    transform: scale(1.08);
+}
+
+/* Text Styling inside Card */
+.component-card h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0 0 10px 0;
+}
+
+.component-card p {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+/* Enquiry Button in Card */
+.enquire-btn {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    color: var(--dark);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.enquire-btn:hover {
+    background: var(--dark);
+    color: #fff;
+    border-color: var(--dark);
+}
+.nav-toggle{
+  display:none;
+  background:none;
+  border:none;
+  font-size:28px;
+  cursor:pointer;
+}
+
+/* ================= SEALING MACHINE MOBILE OVERRIDES ================= */
+@media (max-width: 900px){
+
+  :root{
+    --nav-height: 76px;
+  }
+
+  html, body{
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAVBAR ---------- */
+  .nav-toggle{
+    display:block;
+    color:var(--dark);
+  }
+
+  .brand img{
+    height:40px;
+  }
+
+  .title{
+    font-size:18px;
+    line-height:1.1;
+  }
+
+  .brand .subtitle{
+    font-size:11px;
+  }
+
+  nav.primary-nav{
+    position:absolute;
+    top:var(--nav-height);
+    left:0;
+    width:100%;
+    background:#fff;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    border-bottom:1px solid rgba(13,27,42,.08);
+  }
+
+  nav.primary-nav.open{
+    max-height:90vh;
+  }
+
+  nav.primary-nav ul{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:12px 6%;
+  }
+
+  nav.primary-nav a,
+  nav.primary-nav .mega-btn{
+    width:100%;
+    justify-content:flex-start;
+  }
+
+  /* Disable mega dropdowns on mobile */
+  nav.primary-nav li.mega .mega-panel{
+    display:none !important;
+  }
+
+  /* ---------- HERO ---------- */
+  
+  .hero .hero-container{
+    grid-template-columns:1fr;
+    gap:24px;
+    text-align:left;
+  }
+
+  .hero h1{
+    font-size: 2.1rem;   /* NOT negotiable */
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .hero p{
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .hero img{
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .hero .btn-primary{
+    width: 100%;
+    text-align: center;
+  }
+
+  /* ---------- MACHINE LIST ---------- */
+  .machine-section{
+    padding:40px 6%;
+  }
+
+  .machine-block{
+    grid-template-columns:1fr;
+    gap:28px;
+    padding:40px 0;
+  }
+
+  .machine-content h3{
+    font-size:1.5rem;
+  }
+
+  .machine-content .btn-primary{
+    width:100%;
+    text-align:center;
+  }
+
+  /* ---------- COMPONENT CARDS ---------- */
+  .components-section{
+    padding:60px 6%;
+  }
+
+  .components-grid{
+    gap:20px;
+  }
+
+  .enquire-btn{
+    width:100%;
+  }
+
+}
+/* ================= END SEALING MACHINE MOBILE OVERRIDES ================= */
+
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header" id="siteHeader">
+        <div class="nav-row">
+            <a href="/home/" class="brand">
+                <img src="/media/logo with bg.jpg" alt="Sehdev logo">
+                <div>
+                    <span class="title">Sehdev Machine Tools (India)</span><br>
+                    <small class="subtitle">Precision | Reliability</small>
+                </div>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+
+
+            <nav class="primary-nav">
+                <ul>
+                    <li><a href="/home/">Home</a></li>
+                    <li><a href="/home/aboutus/">About Us</a></li>
+                    <li class="mega">
+                        <a href="#" class="mega-btn">Products ▾</a>
+                        <div class="mega-panel">
+                            <div class="mega-col">
+                                <h4>Machines</h4>
+                                <a href="{% url 'LabellingMachine_view' %}">Labelling Machine</a>
+                                <a href="{% url 'SealingMachine_view' %}">Sealing Machine</a>
+                                <a href="{% url 'FillingMachine_view' %}">Filling Machine</a>
+                                <a href="{% url 'Ancillaryunits_view' %}">Ancillary Units</a>
+                                <a href="{% url 'washing_units_view' %}">Washing Units</a>
+                                <a href="{% url 'Conveyorsystems_view' %}">Conveyor System</a>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Components</h4>
+                                <a href="{% url 'Nozzles_view' %}">Nozzles & Needles</a>
+                                <a href="{% url 'Mechanicalseals_view' %}">Mechanical Seals</a>
+                                <a href="{% url 'Rubbercomponents_view' %}">Rubber Components</a>
+                                <a href="{% url 'ChangeParts_view' %}">Change Parts</a>
+                            </div>
+                                <div class="mega-col">
+                                <h4>Miscellaneous</h4>
+                                <a href="{% url 'Misc_view' %}">Miscellaneous Components</a>
+                                </div>
+                        </div>
+                    </li>
+                    <li class="mega">
+            <a href="/home/services/" class="mega-btn">Services ▾</a>
+            <div class="mega-panel">
+              <div class="mega-col">
+                <a href="/home/services/"><h4>Design Customization &amp; Reverse Engineering</h4></a>
+              </div>
+              <div class="mega-col">
+                <a href="/home/services/"><h4>Product Refurbishment</h4></a>
+              </div>
+            </div>
+          </li>
+          <li><a href="https://maps.app.goo.gl/CpQA18PR5k3FDf7P8">Location</a></li>
+                    <li><a href="/home/contactus/">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-container">
+                <div>
+                    <h1>Advanced Sealing Technology.</h1>
+                    <p>High-speed industrial sealing solutions for Pharmaceutical, Brewery and Food industries.</p>
+                    <a href="{% url 'enquiry' %}" class="btn-primary">Get Technical Quote</a>
+                </div>
+                <div>
+                    <img src="/media/vial sealing.png" alt="Sealing Machine" class="hero-img" >
+                </div>
+            </div>
+        </section>
+
+        <section class="machine-section">
+            {% for machine in machines %}
+            <div class="machine-block">
+                <div class="machine-content">
+                  <h3>{{ machine.name }}</h3>
+                  <p>{{ machine.short_description }}</p>
+                  <a href="{% url 'enquiry' %}?product={{ machine.name|urlencode }}&cat=Sealing" class="btn-primary">
+                      Enquire Now
+                  </a>
+              </div>
+                <div class="machine-image">
+                    <img src="{{ machine.image.url }}" alt="{{ machine.name }}">
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+    </main>
+    <section class="components-section" style="background: #ffffff; border-top: 1px solid #f0f0f0;">
+    <div class="section-header">
+        <h2>Precision Sealing Heads</h2>
+        <p>Custom-engineered ROPP, Screw, and Capping heads for leak-proof sealing performance.</p>
+    </div>
+
+    <div class="components-grid">
+        {% for head in sealing_heads %}
+        <div class="component-card">
+            <div class="comp-img-box">
+                {% if head.image %}
+                    <img src="{{ head.image.url }}" alt="{{ head.name }}">
+                {% else %}
+                    <img src="/media/default-component.png" alt="Sehdev Sealing Head">
+                {% endif %}
+            </div>
+            
+            <div class="card-info">
+                <h3>{{ head.name }}</h3>
+                <p>{{ head.description|truncatewords:15 }}</p>
+                {% if head.specifications %}
+                <small style="color: var(--primary); font-weight: 600; display: block; margin-bottom: 15px;">
+                    {{ head.specifications }}
+                </small>
+                {% endif %}
+            </div>
+
+            <a href="{% url 'enquiry' %}?product={{ head.name|urlencode }}&cat=SealingHeads" class="enquire-btn">
+                Enquire Now
+            </a>
+        </div>
+        {% empty %}
+        <p style="text-align:center; width:100%; grid-column: 1/-1; padding: 40px; color: #94a3b8;">
+            No sealing heads listed yet.
+        </p>
+        {% endfor %}
+    </div>
+</section>
+    <section class="components-section">
+    <div class="section-header">
+        <h2>Sealing Spares & Change Parts</h2>
+        <p>Precision-engineered components to keep your sealing lines running at peak performance.</p>
+    </div>
+
+    <div class="components-grid">
+        {% for component in components %}
+        <div class="component-card">
+            <div class="comp-img-box">
+                {% if component.image %}
+                    <img src="{{ component.image.url }}" alt="{{ component.name }}">
+                {% else %}
+                    <img src="/media/default-component.png" alt="Sehdev Spares">
+                {% endif %}
+            </div>
+            
+            <div class="card-info">
+                <h3>{{ component.name }}</h3>
+                <p>{{ component.description|truncatewords:15 }}</p>
+            </div>
+
+            <a href="{% url 'enquiry' %}?product={{ component.name|urlencode }}&cat=Sealing" class="enquire-btn">
+    Enquire Now
+</a>
+        </div>
+        {% empty %}
+        <p style="text-align:center; width:100%; grid-column: 1/-1; padding: 40px; color: #94a3b8;">
+            No components listed for this category yet.
+        </p>
+        {% endfor %}
+    </div>
+</section>
+
+    <footer style="padding: 50px 6%; background: var(--dark); color: #fff; text-align: center;">
+        <p>© 2025 Sehdev Machine Tools India.</p>
+    </footer>
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const primaryNav = document.querySelector('nav.primary-nav');
+
+  if(navToggle && primaryNav){
+    navToggle.addEventListener('click', e => {
+      e.stopPropagation();
+      primaryNav.classList.toggle('open');
+    });
+
+    primaryNav.addEventListener('click', e => e.stopPropagation());
+
+    document.addEventListener('click', () => {
+      primaryNav.classList.remove('open');
+    });
+
+    primaryNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        primaryNav.classList.remove('open');
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
