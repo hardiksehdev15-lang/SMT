@@ -1,24 +1,27 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 
 # --------------------------------------------------
 # BASE SETUP
 # --------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv()
+if os.getenv("RENDER") is None:
+    load_dotenv()
+
 
 # --------------------------------------------------
 # CORE SETTINGS
 # --------------------------------------------------
 
-SECRET_KEY = os.getenv("SECRET_KEY", "dev-insecure-key-change-me")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-DEBUG = os.getenv("DEBUG", "True") == "True"
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-# ✅ HARD-LOCK localhost hosts
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+
 
 # Admin URL
 ADMIN_URL = os.getenv("ADMIN_URL", "admin/")
@@ -76,14 +79,11 @@ WSGI_APPLICATION = 'smt.wsgi.application'
 # --------------------------------------------------
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'SMT',
-        'USER': 'postgres',
-        'PASSWORD': '052700',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True,
+    )
 }
 
 
@@ -112,7 +112,7 @@ USE_TZ = True
 # --------------------------------------------------
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = '/media/'
@@ -135,16 +135,11 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # --------------------------------------------------
 
 # 🔥 Explicitly disable ALL SSL logic when DEBUG=True
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
 
 SECURE_HSTS_SECONDS = 0
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_HSTS_PRELOAD = False
 
-# 🔥 Disable proxy SSL confusion
-SECURE_PROXY_SSL_HEADER = None
 
 # --------------------------------------------------
 # DEFAULT PK
