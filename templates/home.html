@@ -788,7 +788,7 @@ main{ padding-top: var(--nav-height) !important; }
 <header class="site-header" id="siteHeader">
   <div class="nav-row">
     <a href="/home/" class="brand">
-      <img src="/media/logo with bg.jpg" alt="Sehdev logo">
+      <img src="{% static 'images/logo-with-bg.jpg' %}" alt="Sehdev logo">
       <div>
         <span class="title">Sehdev Machine Tools (India)</span><br>
         <small class="subtitle">Precision | Reliability</small>
@@ -862,8 +862,8 @@ main{ padding-top: var(--nav-height) !important; }
     loop
     playsinline
     preload="metadata"
-    poster="/media/hero.jpg">
-    <source src="/media/Untitled video - Made with Clipchamp.mp4" type="video/mp4">
+    poster="{% static 'Images/hero.jpeg' %}">
+    <source src="{% static 'Images/hero.mp4' %}" type="video/mp4">
   </video>
 
   <!-- Dark overlay -->
@@ -952,7 +952,7 @@ main{ padding-top: var(--nav-height) !important; }
         
         <div class="swiper-slide">
           <a href="{% url 'Nozzles_view' %}" class="machinery-card">
-            <img src="/media/filling.jpg" alt="Nozzles & Needles">
+            <img src="{% static '/Images/filling.jpg' %}" alt="Nozzles & Needles">
             <h3>Nozzles &amp; Needles</h3>
             <ul><li>Accurate flow</li><li>Clean dispensing</li><li><strong>Consistency</strong></li></ul>
           </a>
@@ -960,28 +960,28 @@ main{ padding-top: var(--nav-height) !important; }
         
         <div class="swiper-slide">
           <a href="{% url 'Mechanicalseals_view' %}" class="machinery-card">
-            <img src="/media/download-removebg-preview (1).png" alt="Mechanical Seals">
+            <img src="{% static '/Images/download-removebg-preview (1).png' %}" alt="Mechanical Seals">
             <h3>Mechanical Seals</h3>
             <ul><li>Leak-proof design</li><li>Heavy-duty usage</li><li><strong>Durable</strong></li></ul>
           </a>
         </div>
         <div class="swiper-slide">
           <a href="{% url 'Conveyorsystems_view' %}" class="machinery-card">
-            <img src="/media/roller_conveyor_system.jpeg" alt="Conveyor System">
+            <img src="{% static '/Images/roller_conveyor_system.jpeg' %}" alt="Conveyor System">
             <h3>Conveyor System</h3>
             <ul><li>Smooth transfer</li><li>Modular layouts</li><li><strong>Safe & quick</strong></li></ul>
           </a>
         </div>
         <div class="swiper-slide">
           <a href="{% url 'Rubbercomponents_view' %}" class="machinery-card">
-            <img src="/media/Rubber_Bellows-removebg-preview.png" alt="Rubber Components">
+            <img src="{% static '/Images/Rubber_Bellows-removebg-preview.png' %}" alt="Rubber Components">
             <h3>Rubber Components</h3>
             <ul><li>Quality elastomers</li><li>Perfect fit</li><li><strong>Resilient</strong></li></ul>
           </a>
         </div>
         <div class="swiper-slide">
           <a href="{% url 'ChangeParts_view' %}" class="machinery-card">
-            <img src="/media/change parts/Romaco Change Parts (2).jpg" alt="Change Parts">
+            <img src="{% static '/Images/change-parts/Romaco-Change-Parts.jpg' %}" alt="Change Parts">
             <h3>Change Parts</h3>
             <ul>
               <li>Custom Precision</li>
@@ -992,7 +992,7 @@ main{ padding-top: var(--nav-height) !important; }
         </div>
         <div class="swiper-slide">
           <a href="{% url 'Misc_view' %}" class="machinery-card">
-            <img src="/media/Worm Crushers.png" alt="Miscellaneous">
+            <img src="{% static '/Images/Miscellaneous/Worm-Crushers.png' %}" alt="Miscellaneous">
             <h3>Miscellaneous</h3>
             <ul>
                 <li>Specialized parts</li>
@@ -1003,21 +1003,21 @@ main{ padding-top: var(--nav-height) !important; }
         </div>
         <div class="swiper-slide">
           <a href="{% url 'SealingMachine_view' %}" class="machinery-card">
-            <img src="/media/vial sealing.png" alt="Sealing Machine">
+            <img src="{% static '/Images/vial sealing.png' %}" alt="Sealing Machine">
             <h3>Sealing Unit</h3>
             <ul><li>Secure sealing solutions</li><li>Reliable packaging</li><li><strong>Precision</strong></li></ul>
           </a>
         </div>
         <div class="swiper-slide">
           <a href="{% url 'LabellingMachine_view' %}" class="machinery-card">
-            <img src="/media/gumming-removebg-preview.png" alt="Labelling Machine">
+            <img src="{% static '/Images/gumming-removebg-preview.png' %}" alt="Labelling Machine">
             <h3>Labelling Unit</h3>
             <ul><li>Fast & precise</li><li>All container types</li><li><strong>Durability</strong></li></ul>
           </a>
         </div>
         <div class="swiper-slide">
           <a href="{% url 'FillingMachine_view' %}" class="machinery-card">
-            <img src="/media/filling bg.jpg" alt="Filling Machine">
+            <img src="{% static '/Images/filling-bg.jpg' %}" alt="Filling Machine">
             <h3>Filling Unit</h3>
             <ul><li>Efficient systems</li><li>Liquids, powders & more</li><li><strong>High Output</strong></li></ul>
           </a>

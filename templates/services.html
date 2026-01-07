@@ -390,7 +390,7 @@
   <header class="site-header" id="siteHeader">
     <div class="nav-row">
       <a href="/home/" class="brand">
-        <img src="/media/logo with bg.jpg" alt="Sehdev logo">
+        <img src="{% static '/Images/logo with bg.jpg' %}" alt="Sehdev logo">
         <div>
           <span class="title">Sehdev Machine Tools (India)</span><br>
           <small class="subtitle">Precision | Reliability</small>
@@ -477,7 +477,11 @@
     </section>
 
     <section class="svc-block">
-      <div class="svc-visual bg-blur" style="--bg:url('/media/reverse%20engineering.png');">
+      <div
+  class="svc-visual bg-blur"
+  style="--bg: url('{% static 'images/reverse-engineering.png' %}');"
+>
+
         <div class="svc-overlay"></div>
         <div class="glass-card">
           <h3>Reverse Engineering</h3>
@@ -506,7 +510,11 @@
         </ul>
         <a class="svc-cta" href="{% url 'enquiry' %}?service=refurbishment">Restore your equipment</a>
       </div>
-      <div class="svc-visual bg-blur" style="--bg:url('/media/Gemini_Generated_Image_t97vdgt97vdgt97v.png');">
+      <div
+  class="svc-visual bg-blur"
+  style="--bg: url('{% static 'images/Refurbishment.png' %}');"
+>
+
         <div class="svc-overlay"></div>
         <div class="glass-card">
           <h3>Revitalize Your Assets</h3>

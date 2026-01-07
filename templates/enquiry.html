@@ -119,7 +119,7 @@
       position: relative;
       height: 52vh;
       width: var(--max-width);
-      background: url('/media/enquiry%20bg.png') center/cover no-repeat;
+      background: url("{% static 'images/enquiry-bg.png' %}") center / cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -415,7 +415,7 @@
 <header class="site-header" id="siteHeader">
   <div class="nav-row">
     <a href="{% url 'home' %}" class="brand">
-      <img src="/media/logo with bg.jpg" alt="Sehdev logo">
+      <img src="{% static '/Images/logo-with-bg.jpg' %}" alt="Sehdev logo">
       <div>
         <span class="title">Sehdev Machine Tools (India)</span><br>
         <small class="subtitle">Precision | Reliability</small>
