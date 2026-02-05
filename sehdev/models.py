@@ -1,6 +1,6 @@
 from django.db import models
 from django import forms
-
+from cloudinary.models import CloudinaryField
 
 # =========================
 #   Core / Real Models
@@ -66,10 +66,8 @@ class MachineEnquiry(models.Model):
     refurb_notes = models.TextField(blank=True, null=True)
 
     # ---------- Attachment ----------
-    attachment = models.FileField(
-        upload_to="enquiries/", blank=True, null=True,
-        help_text="Upload drawing / photo / reference document"
-    )
+    attachment = CloudinaryField('auto', blank=True, null=True)
+    
 
     # ---------- Meta ----------
     consent = models.BooleanField(default=False)
@@ -98,7 +96,7 @@ class EnquiryAttachment(models.Model):
 
 class LabellingMachine(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -106,7 +104,7 @@ class LabellingMachine(models.Model):
 
 class LabellingComponent(models.Model):
     name = models.CharField(max_length=255)
-    image = models.ImageField(null=True) 
+    image = CloudinaryField('image', null=True, blank=True) 
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -114,7 +112,7 @@ class LabellingComponent(models.Model):
 
 class SealingMachine(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -122,7 +120,7 @@ class SealingMachine(models.Model):
 
 class SealingHead(models.Model):
      name = models.TextField(null=True)
-     image = models.ImageField(null=True)
+     image = CloudinaryField('image', null=True, blank=True)
      created_at = models.DateTimeField(auto_now=True)
 
 
@@ -131,7 +129,7 @@ class SealingHead(models.Model):
     
 class SealingComponent(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -139,7 +137,7 @@ class SealingComponent(models.Model):
 
 class FillingMachine(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -147,7 +145,7 @@ class FillingMachine(models.Model):
 
 class FillingComponent(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -155,7 +153,7 @@ class FillingComponent(models.Model):
     
 class Misc(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True, upload_to='products/misc/')
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -164,7 +162,7 @@ class Misc(models.Model):
 
 class Ancillaryunits(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -172,7 +170,7 @@ class Ancillaryunits(models.Model):
     
 class WashingUnit(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -180,7 +178,7 @@ class WashingUnit(models.Model):
 
 class WashingComponent(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -189,7 +187,7 @@ from django.db import models
 
 class Nozzles(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
   
     def __str__(self):
@@ -197,7 +195,7 @@ class Nozzles(models.Model):
 
 class Needles(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
@@ -206,7 +204,7 @@ class Needles(models.Model):
 
 class Mechanicalseals(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -214,7 +212,7 @@ class Mechanicalseals(models.Model):
 
 class ChangeParts(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True, upload_to='products/change-parts/')
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -222,7 +220,7 @@ class ChangeParts(models.Model):
 
 class BottleHandlingFixture(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='fixtures/')
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -230,7 +228,7 @@ class BottleHandlingFixture(models.Model):
         
 class Rubbercomponents(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -239,7 +237,7 @@ class Rubbercomponents(models.Model):
 
 class Conveyorsystems(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -247,7 +245,7 @@ class Conveyorsystems(models.Model):
 
 class ConveyorBelt(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __clstr__(self):
@@ -255,7 +253,7 @@ class ConveyorBelt(models.Model):
     
 class ConveyorComponent(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
@@ -263,7 +261,7 @@ class ConveyorComponent(models.Model):
 
 class WearStrip(models.Model):
     name = models.TextField(null=True)
-    image = models.ImageField(null=True, upload_to='wear_strips/')
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -271,7 +269,7 @@ class WearStrip(models.Model):
         
 class PharmaTool(models.Model):
     name = models.CharField(max_length=200)
-    image = models.ImageField(null=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
